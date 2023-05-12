@@ -1,4 +1,4 @@
-use core::ffi::{CStr, c_char, c_double, c_float, c_uint};
+use core::ffi::{c_char, c_double, c_float, c_uint, CStr};
 
 #[link(name = "float")]
 extern "C" {
