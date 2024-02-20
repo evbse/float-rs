@@ -7,9 +7,13 @@ fn main() {
     let c = unsafe { CStr::from_bytes_with_nul_unchecked(d.as_bytes()) };
     println!("{:?}", float::ffi::from_bytes_f32_c(c));
 
+    println!("{:?}", float::from_bytes::parse::<f32>(d.as_bytes()));
+
     let d = "1.0902420340782359E+57";
     let c = unsafe { CStr::from_bytes_with_nul_unchecked(d.as_bytes()) };
     println!("{:?}", float::ffi::from_bytes_f64_c(c));
+
+    println!("{:?}", float::from_bytes::parse::<f64>(d.as_bytes()));
 
     let f: f32 = 1.0902420340782359E+27;
 
