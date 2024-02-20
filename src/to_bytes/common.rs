@@ -22,12 +22,16 @@ impl LoHi for u128 {
     }
 }
 
-pub trait Float: Sealed {}
-
-pub trait Sealed: Copy {
+pub trait Float: Copy + private::Sealed {
     fn is_nonfinite(self) -> bool;
     fn format_nonfinite(self) -> &'static str;
     unsafe fn write_to_buffer(self, buffer: *mut u8) -> usize;
+}
+
+mod private {
+    pub trait Sealed {}
+    impl Sealed for f32 {}
+    impl Sealed for f64 {}
 }
 
 pub(crate) const NAN: &str = "NaN";
@@ -81,9 +85,7 @@ macro_rules! func {
             }
         }
 
-        impl Float for $f {}
-
-        impl Sealed for $f {
+        impl Float for $f {
             fn is_nonfinite(self) -> bool {
                 let bits = self.to_bits();
                 bits & EXPONENT_MASK == EXPONENT_MASK

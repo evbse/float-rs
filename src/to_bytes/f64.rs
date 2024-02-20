@@ -3,7 +3,7 @@ use core::{mem, ptr, slice, str};
 use crate::to_bytes::{
     common::{
         floor_log10_pow2, floor_log10_pow2_minus_log10_4_over_3, floor_log2_pow10, func, Float,
-        LoHi, Sealed, INFINITY, NAN, NEG_INFINITY,
+        LoHi, INFINITY, NAN, NEG_INFINITY,
     },
     to_chars::write_f64 as to_buffer,
 };
