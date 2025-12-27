@@ -222,6 +222,7 @@ pub(crate) unsafe fn write_f64(mant: u64, mut exp: i32, mut buf: *mut u8) -> *mu
     if mant >= 1_0000_0000 {
         lmant = (mant / 1_0000_0000) as u32;
         rmant = (mant as u32) - lmant.wrapping_mul(1_0000_0000);
+        exp += 8;
     } else {
         lmant = mant as u32;
         rmant = 0;
@@ -263,7 +264,7 @@ pub(crate) unsafe fn write_f64(mant: u64, mut exp: i32, mut buf: *mut u8) -> *mu
             prod = ((prod as u32) as u64) * 100;
             write_2_digits((prod >> 32) as u32, buf.add(16));
 
-            exp += 16;
+            exp += 8;
             buf = buf.add(18);
         } else {
             if lmant >= 100_0000 {
